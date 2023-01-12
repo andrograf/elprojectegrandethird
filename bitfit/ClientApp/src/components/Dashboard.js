@@ -21,6 +21,22 @@ export class Dashboard extends Component {
                     <br></br>
                     <Button color="#1b6ec2" className="nav-link text-dark" text="Click here to add profile picture" />
                 </div>
+                <br>
+                </br>
+                <div>
+                    <table className='table table-striped' aria-labelledby="tabelLabel">
+
+                        <thead>
+                            <tr>
+                                <th>Name:</th>
+                                <th>Birth date:</th>
+                                <th>Gender:</th>
+                                <th>Height:</th>
+                                <th>Weight:</th>
+                            </tr>
+                        </thead>
+                        </table>
+                </div>
             </div>
         )
     }
