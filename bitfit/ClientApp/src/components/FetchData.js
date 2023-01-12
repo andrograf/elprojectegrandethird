@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Loading from './Loading'
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
@@ -14,44 +15,32 @@ export class FetchData extends Component {
 
     static renderFoodsTable(foods) {
         console.log(foods.items);
-    return (
-      <table className='table table-striped' aria-labelledby="tabelLabel">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>ServingSize</th>
-            <th>Protein</th>
-            <th>Calories</th>
-          </tr>
-        </thead>
-        <tbody>
-          {foods.items.map((food) => (
+        return (
+            <table className='table table-striped' aria-labelledby="tabelLabel">
+
+            <thead>
               <tr>
-              <td>{food.name}</td>
-              <td>{food.serving_size_g}</td>
-              <td>{food.protein_g}</td>
-              <td>{food.calories}</td>
+                <th>Name</th>
+                <th>ServingSize</th>
+                <th>Protein</th>
+                <th>Calories</th>
               </tr>
-              )
-          )}
-        </tbody>
-      </table>
-    );
-  }
+                </thead>
 
-  render() {
-    let contents = this.state.loading
-      ? <p><em>Loading...</em></p>
-      : FetchData.renderFoodsTable(this.state.foods);
-
-    return (
-      <div>
-        <h1 id="tabelLabel" >This be da foods</h1>
-        <p>This component demonstrates fetching data from the server.</p>
-        {contents}
-      </div>
-    );
-  }
+            <tbody>
+              {foods.items.map((food) => (
+                  <tr>
+                  <td>{food.name}</td>
+                  <td>{food.serving_size_g}</td>
+                  <td>{food.protein_g}</td>
+                  <td>{food.calories}</td>
+                  </tr>
+                  )
+              )}
+            </tbody>
+          </table>
+        );
+      }
 
  async getSampleFoods() {
       const url = "https://api.calorieninjas.com/v1/nutrition?query=apple";
@@ -64,5 +53,20 @@ export class FetchData extends Component {
       })
           .then(resp => resp.json())
           .then(data => this.setState({ foods: data, loading: false }))
-  }
+    }
+
+
+    render() {
+        let contents = this.state.loading
+            ? <Loading />
+            : FetchData.renderFoodsTable(this.state.foods);
+
+        return (
+            <div>
+                <h1 id="tabelLabel" >This be da foods</h1>
+                <p>This component demonstrates fetching data from the server.</p>
+                {contents}
+            </div>
+        );
+    }
 }
