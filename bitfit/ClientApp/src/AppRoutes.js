@@ -1,8 +1,10 @@
+import { Dashboard } from "./components/Dashboard";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
 import { NavMenu } from "./components/NavMenu";
 import { Articles } from './components/Articles';
 import { Recipes } from "./components/Recipes";
+
 
 const AppRoutes = [
     {
@@ -27,6 +29,11 @@ const AppRoutes = [
     element: <Recipes />
 
     }
+    },
+    {
+        path: '/dashboard',
+        element: <Dashboard/>
+        }
 ];
 
 export default AppRoutes;
