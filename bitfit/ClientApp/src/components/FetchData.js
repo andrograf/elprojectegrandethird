@@ -42,20 +42,6 @@ export class FetchData extends Component {
         );
       }
 
-  render() {
-    let contents = this.state.loading
-        ? <Loading />
-      : FetchData.renderFoodsTable(this.state.foods);
-
-    return (
-      <div>
-        <h1 id="tabelLabel" >This be da foods</h1>
-        <p>This component demonstrates fetching data from the server.</p>
-        {contents}
-      </div>
-    );
-  }
-
  async getSampleFoods() {
       const url = "https://api.calorieninjas.com/v1/nutrition?query=apple";
       fetch(url, {
@@ -67,5 +53,20 @@ export class FetchData extends Component {
       })
           .then(resp => resp.json())
           .then(data => this.setState({ foods: data, loading: false }))
-  }
+    }
+
+
+    render() {
+        let contents = this.state.loading
+            ? <Loading />
+            : FetchData.renderFoodsTable(this.state.foods);
+
+        return (
+            <div>
+                <h1 id="tabelLabel" >This be da foods</h1>
+                <p>This component demonstrates fetching data from the server.</p>
+                {contents}
+            </div>
+        );
+    }
 }
