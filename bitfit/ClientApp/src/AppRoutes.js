@@ -28,8 +28,8 @@ const AppRoutes = [
     path: '/recipes',
     element: <Recipes />
 
-    }
     },
+
     {
         path: '/dashboard',
         element: <Dashboard/>
