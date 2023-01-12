@@ -1,0 +1,29 @@
+﻿.articleContainer{
+    border-radius: 10px;
+    position: relative;
+}
+.articleText{
+    opacity: 1; 
+    margin: 1px;
+}
+
+
+.articleBackground {
+    animation: changeOpacity 12s infinite;
+}
+
+
+
+@keyframes changeOpacity {
+    0% {
+        background: rgba(117, 184, 195, .1)
+    }
+
+    50% {
+        background: rgba(76, 142, 198, 0.20)
+    }
+
+    100% {
+        background: rgb(117, 184, 195, 0.10)
+    }
+}
