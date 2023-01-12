@@ -1,0 +1,38 @@
+﻿.foodCard {
+    
+    min-width: 50%;
+    width: 50%;
+    background-color: lightgray;
+    border-radius: 10px;
+    border: 6px groove darkgrey;
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.3);
+}
+
+.foodContainer {
+    width: 95%;
+    justify-content: space-evenly;
+    display: flex;
+}
+
+.diagramData {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #171717;
+    width: 100%;
+    padding-left: 30%;
+    padding-right: 30%;
+}
+
+.modelContainer {
+    width: 95%;
+    background-color: lightsteelblue;
+    position: relative;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.shoutOut {
+    background-color: lightslategrey;
+    box-shadow: 5px 15px 10px rgba(0, 0, 0, 0.4);
+}
