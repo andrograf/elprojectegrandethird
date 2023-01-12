@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import loading from '../images/loading.gif'
+import Loading from './Loading'
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
@@ -15,34 +15,36 @@ export class FetchData extends Component {
 
     static renderFoodsTable(foods) {
         console.log(foods.items);
-    return (
-      <table className='table table-striped' aria-labelledby="tabelLabel">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>ServingSize</th>
-            <th>Protein</th>
-            <th>Calories</th>
-          </tr>
-        </thead>
-        <tbody>
-          {foods.items.map((food) => (
+        return (
+            <table className='table table-striped' aria-labelledby="tabelLabel">
+
+            <thead>
               <tr>
-              <td>{food.name}</td>
-              <td>{food.serving_size_g}</td>
-              <td>{food.protein_g}</td>
-              <td>{food.calories}</td>
+                <th>Name</th>
+                <th>ServingSize</th>
+                <th>Protein</th>
+                <th>Calories</th>
               </tr>
-              )
-          )}
-        </tbody>
-      </table>
-    );
-  }
+                </thead>
+
+            <tbody>
+              {foods.items.map((food) => (
+                  <tr>
+                  <td>{food.name}</td>
+                  <td>{food.serving_size_g}</td>
+                  <td>{food.protein_g}</td>
+                  <td>{food.calories}</td>
+                  </tr>
+                  )
+              )}
+            </tbody>
+          </table>
+        );
+      }
 
   render() {
     let contents = this.state.loading
-        ? <p><img src={loading } alt="poopies"/></p>
+        ? <Loading />
       : FetchData.renderFoodsTable(this.state.foods);
 
     return (

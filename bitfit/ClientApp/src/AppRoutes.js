@@ -2,6 +2,7 @@ import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
 import { NavMenu } from "./components/NavMenu";
+import DataDisplay from "./components/DataDisplay";
 
 const AppRoutes = [
   {
@@ -19,7 +20,11 @@ const AppRoutes = [
   {
     path: '/foods',
     element: <FetchData />
-  }
+    },
+    {
+        path: '/data',
+        element: <DataDisplay />
+    }
 ];
 
 export default AppRoutes;
