@@ -14,7 +14,7 @@ export class AspNetTest extends Component {
     }
 
     static renderFoodsTable(foods) {
-        console.log(foods.items);
+        console.log(foods);
         return (
             <table className='table table-striped' aria-labelledby="tabelLabel">
 
@@ -28,7 +28,7 @@ export class AspNetTest extends Component {
                 </thead>
 
                 <tbody>
-                    {foods.items.map((food) => (
+                    {foods.map((food) => (
                         <tr>
                             <td>{food.name}</td>
                             <td>{food.serving_size_g}</td>
@@ -47,7 +47,7 @@ export class AspNetTest extends Component {
         fetch(url, {
             method: "GET"
         })
-            .then(resp => console.log(resp))
+            .then(resp => resp.json())
             .then(data => this.setState({ foods: data, loading: false }))
     }
 

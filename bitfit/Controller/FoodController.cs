@@ -45,8 +45,8 @@ namespace bitfit.Controller
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var rooms = await _unitOfWork.Foods.GetAllAsync();
-            return Ok(rooms);
+            var foods = await _unitOfWork.Foods.GetAllAsync();
+            return Ok(foods);
         }
 
         [HttpPost("{id}")]
