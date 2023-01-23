@@ -17,7 +17,7 @@ namespace bitfit.Controller
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateRoom(Food food)
+        public async Task<IActionResult> Create(Food food)
         {
             if (ModelState.IsValid)
             {

@@ -60,7 +60,8 @@ namespace bitfit.Model.Entities
             Protein = protein;
             Carbohydrates = carbohydrates;
         }
-
+        [JsonConstructor]
+        public Food(){}
         public Food(double sugar_g, double fiber_g, double serving_size_g, double sodium_mg, string name, double potassium_mg, double fat_saturated_g, double calories, double cholesterol_mg, double protein_g, double carbohydrates_total_g)
         {
             Name = name;

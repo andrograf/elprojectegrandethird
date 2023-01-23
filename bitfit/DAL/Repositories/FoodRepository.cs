@@ -33,13 +33,13 @@ namespace bitfit.DAL.Repositories
         {
             try
             {
-                var existingIngredient = await dbSet.Where(x => x.Id == food.Id).FirstOrDefaultAsync();
-                if (existingIngredient == null)
+                var existing = await dbSet.Where(x => x.Id == food.Id).FirstOrDefaultAsync();
+                if (existing == null)
                 {
                     return await AddAsync(food);
                 }
 
-                existingIngredient.Name = food.Name;
+                existing.Name = food.Name;
                 
                 return true;
             }
@@ -54,10 +54,10 @@ namespace bitfit.DAL.Repositories
         {
             try
             {
-                var existingIngredient = await dbSet.Where(x => x.Id == id).FirstOrDefaultAsync();
-                if (existingIngredient != null)
+                var existing = await dbSet.Where(x => x.Id == id).FirstOrDefaultAsync();
+                if (existing != null)
                 {
-                    dbSet.Remove(existingIngredient);
+                    dbSet.Remove(existing);
                     return true;
 
                 }
