@@ -44,6 +44,23 @@ namespace bitfit.Model.Entities
         [JsonPropertyName("carbohydrates_total_g")]
         public double Carbohydrates { get; set; }
 
+        public Food(long id, double sugar, double fiber, double servingSize, double sodium, string name, double potassium, double fatSaturated, double fatTotal, double calories, double cholesterol, double protein, double carbohydrates)
+        {
+            Id = id;
+            Sugar = sugar;
+            Fiber = fiber;
+            ServingSize = servingSize;
+            Sodium = sodium;
+            Name = name;
+            Potassium = potassium;
+            FatSaturated = fatSaturated;
+            FatTotal = fatTotal;
+            Calories = calories;
+            Cholesterol = cholesterol;
+            Protein = protein;
+            Carbohydrates = carbohydrates;
+        }
+
         public Food(double sugar_g, double fiber_g, double serving_size_g, double sodium_mg, string name, double potassium_mg, double fat_saturated_g, double calories, double cholesterol_mg, double protein_g, double carbohydrates_total_g)
         {
             Name = name;
