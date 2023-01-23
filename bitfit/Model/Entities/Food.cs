@@ -1,9 +1,13 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
-namespace bitfit.Model
+namespace bitfit.Model.Entities
 {
     public class Food
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long Id { get; set; }
+
         [JsonPropertyName("sugar_g")]
         public double Sugar { get; set; }
 
