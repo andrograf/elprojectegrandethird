@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace bitfit.Model.Entities
 {
@@ -7,6 +8,7 @@ namespace bitfit.Model.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public string Name { get; set; }
+        [EmailAddress]
         public string Email { get; set; }
         public float WeightInKg { get; set; }
         public float HeightInCm { get; set; }
