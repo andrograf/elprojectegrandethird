@@ -27,7 +27,7 @@ namespace bitfit.Controller
                 return Ok(food);
             }
 
-            return new JsonResult("Something is wrong") { StatusCode = 500 };
+            return new JsonResult("Invalid food properties maybe.?") { StatusCode = 500 };
         }
 
         [HttpGet("{id}")]
