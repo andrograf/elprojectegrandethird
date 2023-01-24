@@ -1,9 +1,10 @@
 import { Dashboard } from "./components/Dashboard";
-import { FetchData } from "./components/FetchData";
+// import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
 import { NavMenu } from "./components/NavMenu";
 import { Articles } from './components/Articles';
 import { Recipes } from "./components/Recipes";
+import { AspNetTest } from "./components/AspNetTest";
 
 
 const AppRoutes = [
@@ -16,8 +17,8 @@ const AppRoutes = [
     element: <NavMenu />
     },
     {
-    path: '/foods',
-    element: <FetchData />
+        path: '/foods',
+        element: <AspNetTest />
     },
     {
 
