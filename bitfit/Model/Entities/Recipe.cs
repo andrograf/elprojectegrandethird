@@ -1,9 +1,15 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
-namespace BitFit.Models
+namespace bitfit.Model.Entities
 {
     public class Recipe
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long Id { get; set; }
+
+        public string Name { get; set; }
+
         [JsonPropertyName("title")]
         public string Title { get; set; }
         [JsonPropertyName("ingredients")]
