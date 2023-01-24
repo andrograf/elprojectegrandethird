@@ -33,8 +33,7 @@ namespace bitfit.DAL.Repositories
                 var user = await dbSet.Where(x => x.Id == entity.Id).FirstOrDefaultAsync();
                 if (user == null)
                 {
-                    dbSet.Add(entity);
-                    return true;
+                    return await AddAsync(entity);
                 }
 
                 user.Name = entity.Name;
@@ -52,6 +51,20 @@ namespace bitfit.DAL.Repositories
                 return false;
             }
         }
-        //Task<bool> DeleteAsync(long id);
+
+        public async Task<bool> DeleteUserAsync(User entity)
+        {
+            try
+            {
+                var user = await dbSet.Where(x => x.Id == entity.Id).FirstOrDefaultAsync();
+                dbSet.Remove(user);
+                return true;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "{Repo} DeleteUserAsync method error", typeof(UserRepository));
+                return false;
+            }
+        }
     }
 }

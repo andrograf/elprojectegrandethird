@@ -9,6 +9,8 @@ namespace bitfit.DAL.IConfiguration
 
         IFoodRepository Foods { get; }
 
-        Task CompleteAsync();
+        IUserRepository Users { get; }
+
+            Task CompleteAsync();
     }
 }
