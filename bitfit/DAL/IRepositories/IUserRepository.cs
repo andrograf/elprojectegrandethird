@@ -1,6 +1,8 @@
-﻿namespace bitfit.DAL.IRepositories
+﻿using bitfit.Model.Entities;
+
+namespace bitfit.DAL.IRepositories
 {
-    public class IUserRepository
+    public interface IUserRepository : IRepository<User>
     {
     }
 }

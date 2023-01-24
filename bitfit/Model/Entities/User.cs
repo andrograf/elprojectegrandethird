@@ -2,7 +2,7 @@
 {
     public class User
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public float WeightInKg { get; set; }
@@ -14,7 +14,7 @@
             return WeightInKg / (HeightInCm * HeightInCm / 10000);
         }
 
-        public User(int id, string name, string email, float weightInKg, float heightInCm)
+        public User(Guid id, string name, string email, float weightInKg, float heightInCm)
         {
             Id = id;
             Name = name;

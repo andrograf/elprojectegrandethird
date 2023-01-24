@@ -26,7 +26,7 @@ namespace bitfit.DAL.Repositories
             }
         }
 
-        public async Task<bool> Update(User entity)
+        public async Task<bool> Upsert(User entity)
         {
             try
             {
@@ -52,8 +52,6 @@ namespace bitfit.DAL.Repositories
                 return false;
             }
         }
-        Task<bool> AddAsync(T entity);
-        Task<bool> DeleteAsync(long id);
-        Task<bool> UpdateAsync(T entity);
+        //Task<bool> DeleteAsync(long id);
     }
 }
