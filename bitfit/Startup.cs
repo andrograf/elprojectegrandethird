@@ -1,12 +1,15 @@
 using bitfit.DAL;
 using bitfit.DAL.IRepositories;
+using bitfit.DAL.IServices;
 using bitfit.DAL.Repositories;
+using bitfit.DAL.Servies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Identity.Client;
 
 namespace bitfit
 {
@@ -29,6 +32,7 @@ namespace bitfit
             // Add All Transients here
             services.AddTransient<IRecipeService, RecipeService>();
             services.AddTransient<IFoodService, FoodService>();
+            services.AddTransient<IUserService, UserService>();
 
 
             services.AddCors(options =>
