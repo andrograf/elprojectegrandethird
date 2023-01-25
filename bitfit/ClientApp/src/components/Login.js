@@ -1,7 +1,7 @@
 import {useState} from "react"
 
 import FormInput from "./FormInput"
-import Loginstyle from "./Login.css"
+import "./Login.css"
 
 
 const Login = () =>{
@@ -59,6 +59,7 @@ const Login = () =>{
     return(
         <div className="login">
             <form onSubmit={handleSubmit}>
+            <h1>Register</h1>
                 {inputs.map((input)=>(
 
                 <FormInput 
