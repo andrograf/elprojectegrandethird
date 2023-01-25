@@ -21,19 +21,19 @@ namespace bitfit.DAL.Repositories
 
             catch (Exception e)
             {
-                _logger.LogError(e, "{Repo} GetAllAsync method erorr", typeof(UserRepository));
+                _logger.LogError(e, "{Repo} GetAllUsersAsync method error", typeof(UserRepository));
                 return new List<User>();
             }
         }
 
-        public async Task<bool> Upsert(User entity)
-        {
+        public async Task<bool> UpdateAsync(User entity)
+        { 
             try
             {
                 var user = await dbSet.Where(x => x.Id == entity.Id).FirstOrDefaultAsync();
                 if (user == null)
                 {
-                    return await AddAsync(entity);
+                    return false;
                 }
 
                 user.Name = entity.Name;
@@ -47,16 +47,29 @@ namespace bitfit.DAL.Repositories
 
             catch (Exception e)
             {
-                _logger.LogError(e, "{Repo} GetByIdAsync method error", typeof(UserRepository));
+                _logger.LogError(e, "{Repo} GetUserByIdAsync method error", typeof(UserRepository));
                 return false;
             }
         }
 
-        public async Task<bool> DeleteUserAsync(User entity)
+        public async Task<bool> AddAsync(User entity)
         {
             try
             {
-                var user = await dbSet.Where(x => x.Id == entity.Id).FirstOrDefaultAsync();
+                await dbSet.AddAsync(entity);
+                return true;
+            }
+            catch(Exception e) {
+                _logger.LogError(e, "{Repo}AddUserAsync method error", typeof(UserRepository));
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteAsync(Guid id)
+        {
+            try
+            {
+                var user = await dbSet.Where(x => x.Id == id).FirstOrDefaultAsync();
                 dbSet.Remove(user);
                 return true;
             }
