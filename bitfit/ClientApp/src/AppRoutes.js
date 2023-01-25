@@ -5,6 +5,7 @@ import { NavMenu } from "./components/NavMenu";
 import { Articles } from './components/Articles';
 import { Recipes } from "./components/Recipes";
 import { AspNetTest } from "./components/AspNetTest";
+import  Login  from "./components/Login";
 
 
 const AppRoutes = [
@@ -34,7 +35,11 @@ const AppRoutes = [
     {
         path: '/dashboard',
         element: <Dashboard/>
-        }
+        },
+    {
+        path: '/login',
+        element: <Login/>
+    }
 ];
 
 export default AppRoutes;
