@@ -2,7 +2,7 @@
 
 namespace bitfit.DAL.IRepositories
 {
-    public interface IRecipeRepository : IRepository<Recipe>
+    public interface IFoodService : IService<Food>
     {
     }
 }

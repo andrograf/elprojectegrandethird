@@ -1,4 +1,4 @@
-﻿using bitfit.DAL.IConfiguration;
+﻿using bitfit.DAL.IRepositories;
 using bitfit.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,13 +7,11 @@ namespace bitfit.Controller
     [ApiController, Route("/food")]
     public class FoodController : ControllerBase
     {
-        private readonly ILogger<FoodController> _logger;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IFoodService _foodService;
 
-        public FoodController(IUnitOfWork unitOfWork, ILogger<FoodController> logger)
+        public FoodController(IFoodService unitOfWork )
         {
-            _logger = logger;
-            _unitOfWork = unitOfWork;
+            _foodService = unitOfWork;
         }
 
         [HttpPost]
@@ -21,8 +19,7 @@ namespace bitfit.Controller
         {
             if (ModelState.IsValid)
             {
-                await _unitOfWork.Foods.AddAsync(food);
-                await _unitOfWork.CompleteAsync();
+                await _foodService.AddAsync(food);
 
                 return Ok(food);
             }
@@ -33,7 +30,7 @@ namespace bitfit.Controller
         [HttpGet("{id}")]
         public async Task<IActionResult> GetRoom(long id)
         {
-            var food = await _unitOfWork.Foods.GetByIdAsync(id);
+            var food = await _foodService.GetByIdAsync(id);
             if (food == null)
             {
                 return NotFound();
@@ -45,7 +42,7 @@ namespace bitfit.Controller
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var foods = await _unitOfWork.Foods.GetAllAsync();
+            var foods = await _foodService.GetAllAsync();
             return Ok(foods);
         }
 
@@ -57,8 +54,8 @@ namespace bitfit.Controller
                 return BadRequest();
             }
 
-            await _unitOfWork.Foods.UpdateAsync(food);
-            await _unitOfWork.CompleteAsync();
+            await _foodService.UpdateAsync(food);
+
 
             return NoContent();
         }
@@ -66,14 +63,13 @@ namespace bitfit.Controller
         [HttpDelete("/food/delete/{id}")]
         public async Task<IActionResult> DeleteRoom(long id)
         {
-            var food = await _unitOfWork.Foods.GetByIdAsync(id);
+            var food = await _foodService.GetByIdAsync(id);
             if (food == null)
             {
                 return BadRequest();
             }
 
-            await _unitOfWork.Foods.DeleteAsync(id);
-            await _unitOfWork.CompleteAsync();
+            await _foodService.DeleteAsync(id);
             return Ok(id);
         }
     }
