@@ -1,4 +1,4 @@
-﻿using bitfit.DAL.IConfiguration;
+﻿using bitfit.DAL.IServices;
 using bitfit.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,12 +8,11 @@ namespace bitfit.Controller
     public class UserController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
 
-        public UserController(IUnitOfWork unitOfWork, ILogger<UserController> logger)
+        public UserController(IUserService userService)
         {
-            _logger = logger;
-            _unitOfWork = unitOfWork;
+            _userService = userService;
         }
 
         [HttpPost]
@@ -21,8 +20,7 @@ namespace bitfit.Controller
         {
             if (ModelState.IsValid)
             {
-                await _unitOfWork.Users.AddAsync(user);
-                await _unitOfWork.CompleteAsync();
+                await _userService.AddAsync(user);
 
                 return Ok(user);    
             }
@@ -33,7 +31,7 @@ namespace bitfit.Controller
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var user = await _unitOfWork.Users.GetByGuid(id);
+            var user = await _userService.GetByGuid(id);
             if (user == null)
             {
                 return NotFound();
@@ -45,7 +43,7 @@ namespace bitfit.Controller
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var users = await _unitOfWork.Users.GetAllAsync();
+            var users = await _userService.GetAllAsync();
             return Ok(users);
         }
 
@@ -57,8 +55,7 @@ namespace bitfit.Controller
                 return BadRequest();
             }
 
-            await _unitOfWork.Users.UpdateAsync(user);
-            await _unitOfWork.CompleteAsync();
+            await _userService.UpdateAsync(user);
 
             return NoContent();
         }
@@ -66,14 +63,13 @@ namespace bitfit.Controller
         [HttpDelete("/user/delete/{id}")]
         public async Task<IActionResult> Delete(long id)
         {
-            var user = await _unitOfWork.Users.GetByIdAsync(id);
+            var user = await _userService.GetByIdAsync(id);
             if (user == null)
             {
                 return BadRequest();
             }
 
-            await _unitOfWork.Users.DeleteAsync(id);
-            await _unitOfWork.CompleteAsync();
+            await _userService.DeleteAsync(id);
             return Ok(id);
         }
     }

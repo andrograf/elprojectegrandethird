@@ -1,14 +1,15 @@
-﻿using bitfit.DAL.IRepositories;
+﻿using bitfit.DAL.IServices;
+using bitfit.DAL.Repositories;
 using bitfit.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace bitfit.DAL.Repositories
+namespace bitfit.DAL.Servies
 {
-    public class UserRepository : Repository<User>, IUserRepository
+    public class UserService : Service<User>, IUserService
     {
-        public UserRepository(AppDbContext context, ILogger logger) : base(context, logger)
+        public UserService(AppDbContext context) : base(context)
         {
-            
+
         }
 
 
@@ -21,13 +22,13 @@ namespace bitfit.DAL.Repositories
 
             catch (Exception e)
             {
-                _logger.LogError(e, "{Repo} GetAllUsersAsync method error", typeof(UserRepository));
+                //_logger.LogError(e, "{Repo} GetAllUsersAsync method error", typeof(UserService));
                 return new List<User>();
             }
         }
 
         public async Task<bool> UpdateAsync(User entity)
-        { 
+        {
             try
             {
                 var user = await dbSet.Where(x => x.Id == entity.Id).FirstOrDefaultAsync();
@@ -47,7 +48,7 @@ namespace bitfit.DAL.Repositories
 
             catch (Exception e)
             {
-                _logger.LogError(e, "{Repo} GetUserByIdAsync method error", typeof(UserRepository));
+                //_logger.LogError(e, "{Repo} GetUserByIdAsync method error", typeof(UserService));
                 return false;
             }
         }
@@ -59,8 +60,9 @@ namespace bitfit.DAL.Repositories
                 await dbSet.AddAsync(entity);
                 return true;
             }
-            catch(Exception e) {
-                _logger.LogError(e, "{Repo}AddUserAsync method error", typeof(UserRepository));
+            catch (Exception e)
+            {
+                //_logger.LogError(e, "{Repo}AddUserAsync method error", typeof(UserService));
                 return false;
             }
         }
@@ -75,7 +77,7 @@ namespace bitfit.DAL.Repositories
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "{Repo} DeleteUserAsync method error", typeof(UserRepository));
+                //_logger.LogError(e, "{Repo} DeleteUserAsync method error", typeof(UserService));
                 return false;
             }
         }
@@ -89,7 +91,8 @@ namespace bitfit.DAL.Repositories
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "{Repo} GetUserByGuid method error", typeof(UserRepository));
+                //_logger.LogError(e, "{Repo} GetUserByGuid method error", typeof(UserService));
+                return null;
             }
         }
     }
