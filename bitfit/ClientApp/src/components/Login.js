@@ -1,27 +1,72 @@
 import {useState} from "react"
-import {useRef} from "react"
+
 import FormInput from "./FormInput"
 import Loginstyle from "./Login.css"
 
 
 const Login = () =>{
-    // const [username,setUsername] = useState("")
+    const [values,setValues] = useState({
+        username:"",
+        fullname:"",
+        email:"",
+        password:"",
+        confirmpassword:""
+    })
 
+    const inputs = [
+        {
+            id:1,
+            name:"Username",
+            type:"text",
+            placeholder:"username",
+            label:"username"
+        },
+        {
+            id:2,
+            name:"email",
+            type:"text",
+            placeholder:"Email",
+            label:"Email"
+        },
+        {
+            id:3,
+            name:"password",
+            type:"text",
+            placeholder:"Password",
+            label:"Password"
+        },
+        {
+            id:4,
+            name:"confirmPassword",
+            type:"text",
+            placeholder:"Confirm Password",
+            label:"Confirm Password"
+        }
+    ]
     
     
     const handleSubmit = (e)=>{
         e.preventDefault();
-        const data = new FormData(e.target)
-        console.log(Object.fromEntries(data.entries()))
+
+    };
+
+    const onChange = (e)=>{
+        setValues({...values, [e.taget.name]: e.taget.value})
     }
+
+    console.log(values);
 
     return(
         <div className="login">
             <form onSubmit={handleSubmit}>
-                <FormInput name="username" placeholder="User name"/>
-                <FormInput name ="fullname"placeholder="Full name"/>
-                <FormInput name="email" placeholder="E-mail"/>
-                <FormInput name="password" placeholder="Password"/>
+                {inputs.map((input)=>(
+
+                <FormInput 
+                key={input.id}{...input} 
+                value={values[input.name]} 
+                onChange={onChange}/>
+                ))}
+
                 <button>Submit</button>
             </form>
         </div>
