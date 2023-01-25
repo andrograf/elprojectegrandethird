@@ -10,7 +10,8 @@ const Login = () =>{
         fullname:"",
         email:"",
         password:"",
-        confirmPassword:""
+        confirmPassword:"",
+        required:true
     })
 
     const inputs = [
@@ -19,28 +20,40 @@ const Login = () =>{
             name:"Username",
             type:"text",
             placeholder:"username",
-            label:"username"
+            errorMessage: "Username should be 3-16 charachters, and shouldn't include any special charachters.",
+            label:"username",
+            required:true
+
         },
         {
             id:2,
             name:"email",
             type:"text",
             placeholder:"Email",
-            label:"Email"
+            errorMessage:"This should be a valid email address",
+            label:"Email",
+            required:true
+
         },
         {
             id:3,
             name:"password",
             type:"password",
             placeholder:"Password",
-            label:"Password"
+            errorMessage:"Should be 8-20 charachters",
+            label:"Password",
+            required:true
+
         },
         {
             id:4,
             name:"confirmPassword",
             type:"password",
             placeholder:"Confirm password",
-            label:"Confirm password"
+            errorMessage:"Passwords doesn't match",
+            label:"Confirm password",
+            required:true
+
         }
     ]
     

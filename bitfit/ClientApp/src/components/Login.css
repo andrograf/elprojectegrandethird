@@ -49,3 +49,14 @@ button{
     margin-top: 15px;
     margin-bottom: 30px;
 }
+
+span{
+    font-size: 12px;
+    padding: 3px;
+    color:red;
+    display: none;
+}
+
+input:invalid ~ span{
+    display: block;
+}
