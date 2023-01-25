@@ -16,6 +16,9 @@ namespace bitfit.DAL
 
         public IRecipeRepository Recipes { get; private set; }
 
+        public IUserRepository Users { get; private set; }
+
+
         public UnitOfWork(AppDbContext context, ILoggerFactory loggerFactory)
         {
             _context = context;
@@ -23,6 +26,7 @@ namespace bitfit.DAL
 
             Foods = new FoodRepository(_context, _logger);
             Recipes = new RecipeRepository(_context, _logger);
+            Users = new UserRepository(_context, _logger);
         }
 
         public async Task CompleteAsync()

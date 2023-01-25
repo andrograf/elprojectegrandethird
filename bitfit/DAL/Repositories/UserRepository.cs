@@ -79,5 +79,10 @@ namespace bitfit.DAL.Repositories
                 return false;
             }
         }
+
+        public Task<User> GetByGuid(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
