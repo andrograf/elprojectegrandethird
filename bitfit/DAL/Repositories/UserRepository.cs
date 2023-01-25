@@ -80,9 +80,17 @@ namespace bitfit.DAL.Repositories
             }
         }
 
-        public Task<User> GetByGuid(Guid id)
+        public async Task<User> GetByGuid(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var user = await dbSet.Where(x => x.Id == id).FirstOrDefaultAsync();
+                return user;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "{Repo} GetUserByGuid method error", typeof(UserRepository));
+            }
         }
     }
 }
