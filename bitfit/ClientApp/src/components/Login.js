@@ -51,7 +51,7 @@ const Login = () =>{
     };
 
     const onChange = (e)=>{
-        setValues({...values, [e.taget.name]: e.taget.value})
+        setValues({...values, [e.target.name]: e.target.value})
     }
 
     console.log(values);
