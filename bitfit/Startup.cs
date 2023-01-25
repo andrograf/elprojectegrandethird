@@ -1,5 +1,6 @@
 using bitfit.DAL;
-using bitfit.DAL.IConfiguration;
+using bitfit.DAL.IRepositories;
+using bitfit.DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -21,10 +22,15 @@ namespace bitfit
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<AppDbContext>(options =>
+            services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            // Add All Transients here
+            services.AddTransient<IRecipeService, RecipeService>();
+            services.AddTransient<IFoodService, FoodService>();
+
+
             services.AddCors(options =>
             {
                 var frontEndURL = Configuration.GetValue<string>("FrontEndUrl");

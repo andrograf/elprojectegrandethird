@@ -8,8 +8,6 @@ namespace bitfit.DAL
 {
     public class AppDbContext : DbContext
     {
-        public const int MaxIngredientsForPotions = 5;
-
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }

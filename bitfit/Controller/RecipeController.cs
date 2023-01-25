@@ -1,4 +1,4 @@
-﻿using bitfit.DAL.IConfiguration;
+﻿using bitfit.DAL.IRepositories;
 using bitfit.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,13 +7,11 @@ namespace bitfit.Controller
     [ApiController, Route("/recipe")]
     public class RecipeController : ControllerBase
     {
-        private readonly ILogger<RecipeController> _logger;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IRecipeService _recipeService;
 
-        public RecipeController(IUnitOfWork unitOfWork, ILogger<RecipeController> logger)
+        public RecipeController(IRecipeService recipeService)
         {
-            _logger = logger;
-            _unitOfWork = unitOfWork;
+            _recipeService = recipeService;
         }
 
         [HttpPost]
@@ -21,8 +19,7 @@ namespace bitfit.Controller
         {
             if (ModelState.IsValid)
             {
-                await _unitOfWork.Recipes.AddAsync(recipe);
-                await _unitOfWork.CompleteAsync();
+                await _recipeService.AddAsync(recipe);
 
                 return Ok(recipe);
             }
@@ -33,7 +30,7 @@ namespace bitfit.Controller
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(long id)
         {
-            var recipe = await _unitOfWork.Recipes.GetByIdAsync(id);
+            var recipe = await _recipeService.GetByIdAsync(id);
             if (recipe == null)
             {
                 return NotFound();
@@ -45,7 +42,7 @@ namespace bitfit.Controller
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var recipes = await _unitOfWork.Recipes.GetAllAsync();
+            var recipes = await _recipeService.GetAllAsync();
             return Ok(recipes);
         }
 
@@ -57,8 +54,7 @@ namespace bitfit.Controller
                 return BadRequest();
             }
 
-            await _unitOfWork.Recipes.UpdateAsync(recipe);
-            await _unitOfWork.CompleteAsync();
+            await _recipeService.UpdateAsync(recipe);
 
             return NoContent();
         }
@@ -66,14 +62,13 @@ namespace bitfit.Controller
         [HttpDelete("/recipe/delete/{id}")]
         public async Task<IActionResult> Delete(long id)
         {
-            var recipe = await _unitOfWork.Foods.GetByIdAsync(id);
+            var recipe = await _recipeService.GetByIdAsync(id);
             if (recipe == null)
             {
                 return BadRequest();
             }
 
-            await _unitOfWork.Recipes.DeleteAsync(id);
-            await _unitOfWork.CompleteAsync();
+            await _recipeService.DeleteAsync(id);
             return Ok(id);
         }
     }

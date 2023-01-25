@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace bitfit.Model.Entities
@@ -7,7 +8,7 @@ namespace bitfit.Model.Entities
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-
+        [Required]
         public string Name { get; set; }
 
         [JsonPropertyName("title")]
@@ -19,8 +20,9 @@ namespace bitfit.Model.Entities
         [JsonPropertyName("instructions")]
         public string Instructions { get; set; }
 
-        public Recipe(string title, string ingredients, string servings, string instructions)
+        public Recipe(string name,string title, string ingredients, string servings, string instructions)
         {
+            Name = name;
             Title = title;
             Ingredients = ingredients;
             Servings = servings;

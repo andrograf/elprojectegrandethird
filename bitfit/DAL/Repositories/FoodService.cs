@@ -10,13 +10,13 @@ using Microsoft.Extensions.Logging;
 
 namespace bitfit.DAL.Repositories
 {
-    public class RecipeRepository : Repository<Recipe>, IRecipeRepository
+    public class FoodService : Service<Food>, IFoodService
     {
-        public RecipeRepository(AppDbContext context, ILogger logger) : base(context, logger)
+        public FoodService(AppDbContext context) : base(context)
         {
                 
         }
-        public override async Task<IEnumerable<Recipe>> GetAllAsync()
+        public override async Task<IEnumerable<Food>> GetAllAsync()
         {
             try
             {
@@ -24,28 +24,30 @@ namespace bitfit.DAL.Repositories
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "{Repo} GetAllAsync method error", typeof(RecipeRepository));
-                return new List<Recipe>();
+                //_logger.LogError(e, "{Repo} GetAllAsync method error", typeof(FoodService));
+                return new List<Food>();
             }
         }
 
-        public override async Task<bool> UpdateAsync(Recipe recipe)
+        public override async Task<bool> UpdateAsync(Food food)
         {
             try
             {
-                var existing = await dbSet.Where(x => x.Id == recipe.Id).FirstOrDefaultAsync();
+                var existing = await dbSet.Where(x => x.Id == food.Id).FirstOrDefaultAsync();
                 if (existing == null)
                 {
-                    return await AddAsync(recipe);
+                    await AddAsync(food);
+                    
                 }
 
-                existing.Name = recipe.Name;
-                
+                existing.Name = food.Name;
+                await context.SaveChangesAsync();
+
                 return true;
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "{Repo} UpdateAsync method error", typeof(RecipeRepository));
+                //_logger.LogError(e, "{Repo} UpdateAsync method error", typeof(FoodService));
                 return false;
             }
         }
@@ -54,10 +56,11 @@ namespace bitfit.DAL.Repositories
         {
             try
             {
-                var existingIngredient = await dbSet.Where(x => x.Id == id).FirstOrDefaultAsync();
-                if (existingIngredient != null)
+                var existing = await dbSet.Where(x => x.Id == id).FirstOrDefaultAsync();
+                if (existing != null)
                 {
-                    dbSet.Remove(existingIngredient);
+                    dbSet.Remove(existing);
+                    await context.SaveChangesAsync();
                     return true;
 
                 }
@@ -66,7 +69,7 @@ namespace bitfit.DAL.Repositories
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "{Repo} Delete method error", typeof(RecipeRepository));
+                //_logger.LogError(e, "{Repo} Delete method error", typeof(FoodService));
                 return false;
             }
         }
