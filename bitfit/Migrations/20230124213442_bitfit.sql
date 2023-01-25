@@ -22,17 +22,23 @@ INSERT INTO Recipes (Name, Title, Ingredients, Servings, Instructions) VALUES
      '1/4 c Water|1 md Onion, finely chopped|3 tb Chopped parsley|2 ts Oregano|4 lg Cloves garlic, minced|2 ts Pepper|3 ts Salt|2 ts Ground cumin|1 ts Ground fenugreek|8 Individual pita breads|1 lg Onion, sliced into thin rings|1 lg Tomato, coarsely chopped|1 Clove garlic, minced|1/2 ts Mustard (dijon)|1 tb Red wine vinegar|3 tb Olive oil|1 c Plain yogurt',
      '1 Servings',
       'Combine ground lamb, water, onion, parsley, oregano, garlic, pepper, salt, cumin and fenugreek and mix thoroughly. Shape into loaf and wrap tightly in plastic film to compress the mixture. Refrigerate for 2 hours. To cook in the oven: Preheat oven to 350F. Unwrap meat mixture and place on a cookie sheet or shallow baking dish and bake 1 to 1 1/2 hours. Remove from oven, drain excess fat and let stand 15 minutes before carving. Use a very sharp knife and cut in thin slices. To cook on a rotisserie: Push the metal skewer through the center of the meat (lengthwise) and place attachment in oven according to its directions. Cook at 350F, carving the cooked and crispy outside slices as needed. To cook on the grill: Place the meat on a hot grill. Turn and continue to cook until brown on all sides. Slice thin srips from the browned loaf as it cooks, exposing unbrowned surface to be browned as you carve thin slices from the other side. Continue turning the loaf, browning the surface exposed to the fire while you carve from the side facing away from the coals. When the loaf is too small to carve on the grill, brown on all sides and cut into slices.')
+END
+
+IF NOT EXISTS ( SELECT 1 FROM Foods WHERE Name = 'potato')
+BEGIN
 INSERT INTO Foods (Name,Sugar,Fiber, ServingSize,Sodium,Potassium,FatSaturated,FatTotal,Calories,Cholesterol,Protein,Carbohydrates) VALUES
     ('potato', 1.2, 2.2, 100,10,70,0,0.1,92.7,2.5,0.7,21),
     ('pear', 9.8,3.1,100,1,11,0,0.1,56.7,0,0.4,14.9),
     ('oat', 1,10.3,100,6,416,1.1,6.4,368.3,0,13.2,67),
     ('rice', 0.1,0.4,100,1,42,0.1,0.3,127.4,0,2.7,28.4)
+END
+
+--IF NOT EXISTS ( SELECT 1 FROM User WHERE Name = 'Frank')
+--BEGIN
 -- INSERT INTO User (Name, Email, WeightInKg, HeightInCm, Password) VALUES
 --     ('tomi', 'hajas@hajas.com', 94, 187, 'password'),
 --     ('patri', 'patri@patri.com', 53, 167,'password'),
 --     ('gergo', 'gergo@gergo.com', 80, 175,'password'),
 --     ('robi', 'robi@robi.com', 85, 185,'password')
 --     ('Frank', 'frank@frank.com', 103, 192,'password')
---     ('Frank', 'frank@frank.com', 103, 192,'password')
--- ;
-END
+--END
