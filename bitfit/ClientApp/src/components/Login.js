@@ -10,7 +10,7 @@ const Login = () =>{
         fullname:"",
         email:"",
         password:"",
-        confirmpassword:""
+        confirmPassword:""
     })
 
     const inputs = [
@@ -31,16 +31,16 @@ const Login = () =>{
         {
             id:3,
             name:"password",
-            type:"text",
+            type:"password",
             placeholder:"Password",
             label:"Password"
         },
         {
             id:4,
             name:"confirmPassword",
-            type:"text",
-            placeholder:"Confirm Password",
-            label:"Confirm Password"
+            type:"password",
+            placeholder:"Confirm password",
+            label:"Confirm password"
         }
     ]
     
