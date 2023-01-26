@@ -37,7 +37,7 @@ const AppRoutes = [
         element: <Dashboard/>
         },
     {
-        path: '/login',
+        path: '/registration',
         element: <Register/>
     }
 ];
