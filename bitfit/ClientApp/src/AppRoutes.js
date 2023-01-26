@@ -5,7 +5,7 @@ import { NavMenu } from "./components/NavMenu";
 import { Articles } from './components/Articles';
 import { Recipes } from "./components/Recipes";
 import { AspNetTest } from "./components/AspNetTest";
-import  Login  from "./components/Login";
+import  Login  from "./components/Register";
 
 
 const AppRoutes = [

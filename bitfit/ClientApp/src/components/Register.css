@@ -33,6 +33,10 @@ label{
     color: gray;
 }
 
+p{
+    text-align: center;
+    padding:15 px 0 15 px 0;
+}
 h1 {
     text-align: center;
     background-color: ghostwhite;

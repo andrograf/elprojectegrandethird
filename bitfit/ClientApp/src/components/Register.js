@@ -1,7 +1,7 @@
 import {useState} from "react"
 
 import FormInput from "./FormInput"
-import "./Login.css"
+import "./Register.css"
 
 
 const Login = () =>{
@@ -86,6 +86,7 @@ const Login = () =>{
                 ))}
 
                 <button>Submit</button>
+            <p>Already have an account? Click here to login!</p>
             </form>
         </div>
     )

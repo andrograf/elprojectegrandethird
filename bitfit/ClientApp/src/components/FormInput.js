@@ -1,6 +1,6 @@
 ﻿import { useState } from "react";
 import "../components/formInput.css"
-import "../components/Login.css"
+import "../components/Register.css"
 
 const FormInput = (props) => {
     const [focused, setFocused] = useState(false);
