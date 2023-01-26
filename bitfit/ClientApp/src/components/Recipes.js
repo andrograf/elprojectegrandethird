@@ -33,13 +33,9 @@ export class Recipes extends Component {
     }
 
     async getSampleRecipes() {
-        const url = "https://api.api-ninjas.com/v1/recipe?query=chicken";
+        const url = "https://localhost:7144/recipe";
         fetch(url, {
             method: "GET",
-            withCredentials: true,
-            headers: {
-                "X-Api-Key": "rjMn+tsZm073LSFbqMeumg==tUY5fuxhyNZqNik8",
-            }
         })
             .then(resp => resp.json())
             .then(data => this.setState({ recipes: data, loading: false }))
