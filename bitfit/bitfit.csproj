@@ -36,6 +36,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\20230124213442_bitfit.sql" />
+     <None Remove="Migrations\20230124213442_bitfit.sql" />
     <Folder Include="DAL\Repositories\" />
   </ItemGroup>
 
