@@ -19,3 +19,7 @@
     cursor: default;
     background-color: gray;
 }
+
+.nav-card:hover {
+    background-color: deepskyblue;
+}
