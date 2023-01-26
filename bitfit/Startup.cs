@@ -1,5 +1,8 @@
 using bitfit.DAL;
-using bitfit.DAL.IConfiguration;
+using bitfit.DAL.IRepositories;
+using bitfit.DAL.IServices;
+using bitfit.DAL.Repositories;
+using bitfit.DAL.Servies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Data.SqlClient;
@@ -7,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Identity.Client;
 
 namespace bitfit
 {
@@ -36,10 +40,16 @@ namespace bitfit
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<AppDbContext>(options =>
+            services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            // Add All Transients here
+            services.AddTransient<IRecipeService, RecipeService>();
+            services.AddTransient<IFoodService, FoodService>();
+            services.AddTransient<IUserService, UserService>();
+
+
             services.AddCors(options =>
             {
                 var frontEndURL = Configuration.GetValue<string>("FrontEndUrl");

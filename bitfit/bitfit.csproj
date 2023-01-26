@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -36,11 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Migrations\20230124213442_bitfit.sql" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\20230124213442_bitfit.sql" />
+     <None Remove="Migrations\20230124213442_bitfit.sql" />
+    <Folder Include="DAL\Repositories\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

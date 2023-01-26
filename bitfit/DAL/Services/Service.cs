@@ -6,18 +6,15 @@ using Microsoft.Extensions.Logging;
 
 namespace bitfit.DAL.Repositories
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class Service<T> : IService<T> where T : class
     {
         protected AppDbContext context;
 
         protected DbSet<T> dbSet;
 
-        protected readonly ILogger _logger;
-
-        public Repository(AppDbContext context, ILogger logger)
+        public Service(AppDbContext context)
         {
             this.context = context;
-            _logger = logger;
             dbSet = context.Set<T>();
         }
 
