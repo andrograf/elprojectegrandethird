@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../images/bitfit_logo.png';
+import logoHover from '../images/bitfit_logo_hover.png';
 import './NavMenu.css';
 
 export class NavMenu extends Component {
@@ -10,7 +11,8 @@ export class NavMenu extends Component {
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
-      collapsed: true
+        collapsed: true,
+        hover: false
     };
   }
 
@@ -26,7 +28,8 @@ export class NavMenu extends Component {
             <nav className="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div className="container-fluid">
                     <div >
-                        <a className="navbar-brand" href="/" asp-area="" asp-controller="Home" asp-action="Index"><img src={logo} alt="BitFit" width="180px" /></a>
+                        <a className="navbar-brand" href="/" asp-area="" asp-controller="Home" asp-action="Index"><img src={this.state.hovered ? logo : logoHover } alt="BitFit" width="180px" onMouseOut={() => this.setState({ hovered: true })}
+                            onMouseOver={() => this.setState({ hovered: false })} /></a>
                         
                     </div>
                     <div className="navbar-collapse collapse d-sm-inline-flex justify-content-between">
