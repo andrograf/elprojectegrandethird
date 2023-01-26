@@ -4,7 +4,7 @@ import FormInput from "./FormInput"
 import "./Register.css"
 
 
-const Login = () =>{
+const Register = () =>{
     const [values,setValues] = useState({
         username:"",
         fullname:"",
@@ -92,4 +92,4 @@ const Login = () =>{
     )
 };
 
-export default Login;
+export default Register;
