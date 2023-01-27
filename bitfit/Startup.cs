@@ -33,7 +33,7 @@ namespace bitfit
             services.AddTransient<IRecipeService, RecipeService>();
             services.AddTransient<IFoodService, FoodService>();
             services.AddTransient<IUserService, UserService>();
-
+            services.AddTransient<IGanttService, GanttService>();
 
             services.AddCors(options =>
             {

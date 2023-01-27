@@ -5,6 +5,7 @@ import { NavMenu } from "./components/NavMenu";
 import { Articles } from './components/Articles';
 import { Recipes } from "./components/Recipes";
 import { AspNetTest } from "./components/AspNetTest";
+import { GanttMaker } from "./components/GanttMaker";
 
 
 const AppRoutes = [
@@ -28,13 +29,15 @@ const AppRoutes = [
     {
     path: '/recipes',
     element: <Recipes />
-
     },
-
     {
         path: '/dashboard',
         element: <Dashboard/>
-        }
+    },
+    {
+        path: '/ganttmaker',
+        element: <GanttMaker/>
+    }
 ];
 
 export default AppRoutes;

@@ -13,7 +13,6 @@ namespace bitfit.Model.Entities
         public float WeightInKg { get; set; }
         public float HeightInCm { get; set; }
         public float BMI { get; set; }
-
         public float CalculateBMI()
         {
             return WeightInKg / (HeightInCm * HeightInCm / 10000);
