@@ -5,6 +5,7 @@ using bitfit.DAL.Repositories;
 using bitfit.DAL.Servies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -80,7 +81,7 @@ namespace bitfit
                 var context = scope.ServiceProvider.GetService<AppDbContext>();
                 context.Database.EnsureCreated();
             }
-            RunSqlAtStart("20230124213442_bitfit.sql", Configuration);
+            //RunSqlAtStart("20230124213442_bitfit.sql", Configuration);
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

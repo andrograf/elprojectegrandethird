@@ -15,7 +15,7 @@ namespace bitfit.Controller
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Gantt gantt)
+        public async Task<IActionResult> Create([FromForm]Gantt gantt)
         {
             if (ModelState.IsValid)
             {
