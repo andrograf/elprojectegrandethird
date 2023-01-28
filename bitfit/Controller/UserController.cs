@@ -10,8 +10,9 @@ namespace bitfit.Controller
         private readonly ILogger<UserController> _logger;
         private readonly IUserService _userService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, ILogger<UserController> logger)
         {
+            _logger = logger;
             _userService = userService;
         }
 

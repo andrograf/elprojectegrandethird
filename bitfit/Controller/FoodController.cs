@@ -9,8 +9,11 @@ namespace bitfit.Controller
     {
         private readonly IFoodService _foodService;
 
-        public FoodController(IFoodService unitOfWork )
+        private readonly ILogger _logger;
+
+        public FoodController(IFoodService unitOfWork, ILogger<FoodController> logger )
         {
+            _logger = logger;
             _foodService = unitOfWork;
         }
 
@@ -43,6 +46,7 @@ namespace bitfit.Controller
         public async Task<IActionResult> Get()
         {
             var foods = await _foodService.GetAllAsync();
+            _logger.LogError("Hello error");
             return Ok(foods);
         }
 
