@@ -1,23 +1,15 @@
 ﻿import React, { Component } from 'react';
-import Loading from './Loading'
-import mermaid from "mermaid";
 import './GanttMaker.css'
+import GanttForm from './GanttForm';
 
 export class GanttMaker extends Component {
     static displayName = GanttMaker.name;
 
     constructor(props) {
         super(props);
+
     }
 
-    async getSampleFoods() {
-        const url = "https://localhost:7144/gantt/";
-        fetch(url, {
-            method: "Post"
-        })
-            .then(resp => resp.json())
-            .then(data => this.setState({ gantt: data, loading: false }))
-    }
 
     render() {
 
@@ -31,24 +23,14 @@ export class GanttMaker extends Component {
                 <p>This component demonstrates dynamic interaction with Mermaid.</p>
                 <br></br>
                 <div>
+                    
+                        <GanttForm />
+                    <div className="responseViewer">
+                    </div>
                 </div>
 
 
             </div>
         );
-    }
-}
-
-mermaid.initialize({
-    startOnLoad: true
-});
-
-class Mermaid extends React.Component {
-    componentDidMount() {
-        mermaid.contentLoaded();
-    }
-
-    render() {
-        return <div className="mermaid">{this.props.chart}</div>;
     }
 }
