@@ -21,7 +21,7 @@ namespace bitfit.Controller
             if (ModelState.IsValid)
             {
                 await _userService.AddAsync(user);
-                return Ok(user);    
+                return Redirect("https://localhost:44447/login");    
             }
 
             return new JsonResult("Invalid User") { StatusCode = 500 };
