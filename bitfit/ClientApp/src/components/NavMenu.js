@@ -48,7 +48,7 @@ export class NavMenu extends Component {
                             </li>
                             <li className="nav-item">
                                 <div className="nav-card">
-                                    <a className="nav-link text-dark" href="/gantt" asp-area="" asp-controller="Home" asp-action="Index">Gantt</a>
+                                    <a className="nav-link text-dark" href="/challenge" asp-area="" asp-controller="Home" asp-action="Index">Challenge</a>
                                 </div>
                             </li>
                             <li className="nav-item">

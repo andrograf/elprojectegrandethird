@@ -59,8 +59,8 @@ namespace bitfit
                     builder.WithOrigins(frontEndURL).AllowAnyMethod().AllowAnyHeader();
                 });
             });
-            services.AddControllersWithViews();
-            
+            services.AddMvc().AddControllersAsServices();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

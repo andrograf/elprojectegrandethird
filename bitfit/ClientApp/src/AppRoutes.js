@@ -35,7 +35,7 @@ const AppRoutes = [
         element: <Dashboard/>
     },
     {
-        path: '/gantt',
+        path: '/challenge',
         element: <ChallengeForm />
     }
 ];

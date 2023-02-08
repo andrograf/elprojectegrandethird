@@ -1,4 +1,4 @@
-﻿namespace bitfit.Model.Entities
+﻿namespace bitfit.Model
 {
     public class ChallengeSettings
     {

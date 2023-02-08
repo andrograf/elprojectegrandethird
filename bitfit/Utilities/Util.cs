@@ -4,7 +4,7 @@ namespace bitfit.Utilities
 {
     public class Util
     {
-        internal void CalculateDailyCalories(User user)
+        public float CalculateDailyCalories(User user)
         {
             throw new NotImplementedException();
         }

@@ -1,5 +1,6 @@
 ﻿using bitfit.DAL.IServices;
 using bitfit.DAL.Repositories;
+using bitfit.Model;
 using bitfit.Model.Entities;
 using bitfit.Utilities;
 using Microsoft.EntityFrameworkCore;

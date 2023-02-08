@@ -1,10 +1,14 @@
-﻿using bitfit.DAL.IServices;
+﻿using Azure;
+using bitfit.DAL.IServices;
+using bitfit.Model;
 using bitfit.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
+using RestSharp;
+using System.Threading;
 
 namespace bitfit.Controller
 {
-    [ApiController, Route("/gantt")]
+    [ApiController, Route("/challenge")]
     public class ChallengeController : ControllerBase
     {
         private readonly IChallengeService _challengeService;
@@ -15,13 +19,19 @@ namespace bitfit.Controller
         }
         
         [HttpPost]
-        [Route("/gantt/new")]
-        public async Task<IActionResult> GenerateChart([FromForm]ChallengeSettings settings)
+        [Route("/challenge/new/{guid}")]
+        public async Task<IActionResult> GenerateChart([FromForm]ChallengeSettings settings, Guid guid)
         {
             if (ModelState.IsValid)
             {
-                var challenge = _challengeService.GenerateChart(settings);
-                return Redirect("/gantt");
+
+                using var client = new HttpClient();
+
+                var response = await client.GetAsync($"https://localhost:7144/user/{guid}");
+
+                    //var challenge = _challengeService.GenerateChart(settings);
+                    return Redirect("/challenge");
+
             }
             return new JsonResult("Invalid settings") { StatusCode = 500 };
         }
@@ -72,7 +82,7 @@ namespace bitfit.Controller
             return NoContent();
         }
 
-        [HttpDelete("/gantt/delete/{id}")]
+        [HttpDelete("/challenge/delete/{id}")]
         public async Task<IActionResult> Delete(long id)
         {
             var gantt = await _challengeService.GetByIdAsync(id);

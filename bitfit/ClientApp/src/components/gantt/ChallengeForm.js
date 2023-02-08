@@ -8,6 +8,9 @@ export default function ChallengeForm() {
     const [data, setData] = useState({ title: "Your Title Here" });
     let now = moment().format("YYYY-MM-DD");
 
+    let userId = "9b19302c-c0fc-4911-1d87-08db09dc96bf";
+    let url = "https://localhost:7144/challenge/new/" + userId;
+
     let chart =
         `gantt
     title ${data.title}
@@ -33,7 +36,7 @@ export default function ChallengeForm() {
 
     return (
         <div className="ganttFormContainer">
-            <form action="https://localhost:7144/gantt/new" method="post">
+            <form action="https://localhost:7144/challenge/new/48c90e75-b98e-4b90-a9e4-08db09e0d01d" method="post">
 
                 <select name="challengeType">
                     <option value="generalFitness">General Fitness</option>
