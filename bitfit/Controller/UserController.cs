@@ -15,13 +15,12 @@ namespace bitfit.Controller
             _userService = userService;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create(User user)
+        [HttpPost("/register")]
+        public async Task<IActionResult> Create([FromForm]User user)
         {
             if (ModelState.IsValid)
             {
                 await _userService.AddAsync(user);
-
                 return Ok(user);    
             }
 
@@ -47,7 +46,7 @@ namespace bitfit.Controller
             return Ok(users);
         }
 
-        [HttpPost("{id}")]
+        [HttpPost("/user/{id}")]
         public async Task<IActionResult> Update(Guid id, User user)
         {
             if (id != user.Id)

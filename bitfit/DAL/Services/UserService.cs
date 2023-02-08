@@ -27,7 +27,7 @@ namespace bitfit.DAL.Servies
             }
         }
 
-        public async Task<bool> UpdateAsync(User entity)
+        public override async Task<bool> UpdateAsync(User entity)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace bitfit.DAL.Servies
             }
         }
 
-        public async Task<bool> AddAsync(User entity)
+        public override async Task<bool> AddAsync(User entity)
         {
             try
             {
