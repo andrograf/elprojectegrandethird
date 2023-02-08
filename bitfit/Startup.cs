@@ -49,7 +49,7 @@ namespace bitfit
             services.AddTransient<IUserService, UserService>();
 
             // Target react proxy as frontend
-            services.AddTransient<IGanttService, GanttService>();
+            services.AddTransient<IChallengeService, ChallengeService>();
 
             services.AddCors(options =>
             {

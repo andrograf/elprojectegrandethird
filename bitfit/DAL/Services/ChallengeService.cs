@@ -1,19 +1,20 @@
 ﻿using bitfit.DAL.IServices;
 using bitfit.DAL.Repositories;
 using bitfit.Model.Entities;
+using bitfit.Utilities;
 using Microsoft.EntityFrameworkCore;
 
 namespace bitfit.DAL.Servies
 {
-    public class GanttService : Service<Gantt>, IGanttService
+    public class ChallengeService : Service<Challenge>, IChallengeService
     {
-        public GanttService(AppDbContext context) : base(context)
+        public ChallengeService(AppDbContext context) : base(context)
         {
 
         }
 
 
-        public override async Task<IEnumerable<Gantt>> GetAllAsync()
+        public override async Task<IEnumerable<Challenge>> GetAllAsync()
         {
             try
             {
@@ -23,11 +24,11 @@ namespace bitfit.DAL.Servies
             catch (Exception e)
             {
                 //_logger.LogError(e, "{Repo} GetAllUsersAsync method error", typeof(UserService));
-                return new List<Gantt>();
+                return new List<Challenge>();
             }
         }
 
-        public async Task<bool> UpdateAsync(Gantt gantt)
+        public async Task<bool> UpdateAsync(Challenge gantt)
         {
             try
             {
@@ -37,9 +38,7 @@ namespace bitfit.DAL.Servies
                     return false;
                 }
 
-                existing.StartDate = gantt.StartDate;
-                existing.EndDate = gantt.EndDate;
-                existing.Exercises = gantt.Exercises;
+
                 dbSet.Update(existing);
 
                 return true;
@@ -52,7 +51,7 @@ namespace bitfit.DAL.Servies
             }
         }
 
-        public async Task<bool> AddAsync(Gantt gantt)
+        public async Task<bool> AddAsync(Challenge gantt)
         {
             try
             {
@@ -81,5 +80,18 @@ namespace bitfit.DAL.Servies
             }
         }
 
+        public Challenge GenerateChart(ChallengeSettings settings, User user)
+        {
+            Util util = new Util();
+            var dailyCalories = util.CalculateDailyCalories(user);
+
+
+            Challenge challenge = new Challenge();
+            if(settings.ChallengeType == "WeightLoss")
+            {
+               
+            }
+            return challenge;
+        }
     }
 }

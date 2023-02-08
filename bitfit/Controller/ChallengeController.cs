@@ -5,21 +5,34 @@ using Microsoft.AspNetCore.Mvc;
 namespace bitfit.Controller
 {
     [ApiController, Route("/gantt")]
-    public class GanttController : ControllerBase
+    public class ChallengeController : ControllerBase
     {
-        private readonly IGanttService _ganttService;
+        private readonly IChallengeService _challengeService;
 
-        public GanttController(IGanttService ganttService)
+        public ChallengeController(IChallengeService ganttService)
         {
-            _ganttService = ganttService;
+            _challengeService = ganttService;
         }
-
+        
         [HttpPost]
-        public async Task<IActionResult> Create([FromForm]Gantt gantt)
+        [Route("/gantt/new")]
+        public async Task<IActionResult> GenerateChart([FromForm]ChallengeSettings settings)
         {
             if (ModelState.IsValid)
             {
-                await _ganttService.AddAsync(gantt);
+                var challenge = _challengeService.GenerateChart(settings);
+                return Redirect("/gantt");
+            }
+            return new JsonResult("Invalid settings") { StatusCode = 500 };
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromForm]Challenge gantt)
+        {
+            if (ModelState.IsValid)
+            {
+                await _challengeService.AddAsync(gantt);
 
                 return Ok(gantt);    
             }
@@ -30,7 +43,7 @@ namespace bitfit.Controller
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(long id)
         {
-            var gantt = await _ganttService.GetByIdAsync(id);
+            var gantt = await _challengeService.GetByIdAsync(id);
             if (gantt == null)
             {
                 return NotFound();
@@ -42,19 +55,19 @@ namespace bitfit.Controller
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var gantt = await _ganttService.GetAllAsync();
+            var gantt = await _challengeService.GetAllAsync();
             return Ok(gantt);
         }
 
         [HttpPost("{id}")]
-        public async Task<IActionResult> Update(long id, Gantt gantt)
+        public async Task<IActionResult> Update(long id, Challenge gantt)
         {
             if (id != gantt.Id)
             {
                 return BadRequest();
             }
 
-            await _ganttService.UpdateAsync(gantt);
+            await _challengeService.UpdateAsync(gantt);
 
             return NoContent();
         }
@@ -62,13 +75,13 @@ namespace bitfit.Controller
         [HttpDelete("/gantt/delete/{id}")]
         public async Task<IActionResult> Delete(long id)
         {
-            var gantt = await _ganttService.GetByIdAsync(id);
+            var gantt = await _challengeService.GetByIdAsync(id);
             if (gantt == null)
             {
                 return BadRequest();
             }
 
-            await _ganttService.DeleteAsync(id);
+            await _challengeService.DeleteAsync(id);
             return Ok(id);
         }
     }

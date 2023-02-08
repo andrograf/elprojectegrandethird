@@ -18,6 +18,6 @@ namespace bitfit.DAL
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<Gantt> Gantts { get; set; }
+        public DbSet<Challenge> Challenges { get; set; }
     }
 }
