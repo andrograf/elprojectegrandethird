@@ -79,8 +79,10 @@ const Register = () =>{
                     onChange = {onChange}/>
                     ))}
 
-                    <button type = "submit">Submit</button>
-                <p>Already have an account? Click here to login!</p>
+                <button type="submit">Submit</button>
+                <p>Already have an account? </p>
+                <p><a href="/login">Click here to login!</a></p>
+
             </form>
         </div>
     )
