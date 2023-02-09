@@ -30,15 +30,18 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="DAL\Repositories\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="DAL\Repositories\**" />
+    <EmbeddedResource Remove="DAL\Repositories\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="DAL\Repositories\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Migrations\20230124213442_bitfit.sql" />
      <None Remove="Migrations\20230124213442_bitfit.sql" />
-    <Folder Include="DAL\Repositories\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
