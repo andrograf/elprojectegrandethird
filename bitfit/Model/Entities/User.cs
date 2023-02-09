@@ -7,7 +7,7 @@ namespace bitfit.Model.Entities
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
         [EmailAddress]
         public string Email { get; set; }
 
@@ -27,6 +27,7 @@ namespace bitfit.Model.Entities
 
         public User(string name, string email, string password, float? weightInKg, float? heightInCm)
         {
+            Id = Guid.NewGuid();
             Name = name;
             Email = email;
             WeightInKg = weightInKg;

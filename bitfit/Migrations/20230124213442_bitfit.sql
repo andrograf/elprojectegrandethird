@@ -35,10 +35,10 @@ END
 
 IF NOT EXISTS ( SELECT 1 FROM Users WHERE Name = 'Frank')
 BEGIN
- INSERT INTO Users (Name, Email, WeightInKg, HeightInCm, Password) VALUES
-     ('tomi', 'hajas@hajas.com', 94, 187, 'password'),
-     ('patri', 'patri@patri.com', 53, 167, 'password'),
-     ('gergo', 'gergo@gergo.com', 80, 175, 'password'),
-     ('robi', 'robi@robi.com', 85, 185, 'password'),
-     ('Frank', 'frank@frank.com', 103, 192, 'password')
+ INSERT INTO Users (Id, Name, Email, WeightInKg, HeightInCm, Password, BMI) VALUES
+     (NEWID(), 'tomi', 'hajas@hajas.com', 94, 187, 'password', 26.9),
+     (NEWID(), 'patri', 'patri@patri.com', 53, 167, 'password', 19),
+     (NEWID(), 'gergo', 'gergo@gergo.com', 80, 175, 'password', 26.1),
+     (NEWID(), 'robi', 'robi@robi.com', 85, 185, 'password', 24.8),
+     (NEWID(), 'Frank', 'frank@frank.com', 103, 192, 'password', 27.9)
 END

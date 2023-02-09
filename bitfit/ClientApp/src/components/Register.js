@@ -65,11 +65,10 @@ const Register = () =>{
         setValues({...values, [e.target.name]: e.target.value})
     }
 
-    console.log(values);
 
     return(
         <div className="login">
-            <form action="https://localhost:7144/register" method="post">
+            <form action="https://localhost:7144/user/Create" method="post">
                 <h1>Register</h1>
                     {inputs.map((input)=>(
 

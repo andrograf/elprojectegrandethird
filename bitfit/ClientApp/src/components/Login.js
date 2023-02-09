@@ -16,7 +16,7 @@ const Login = () =>{
             name:"Email",
             type:"text",
             placeholder:"Email",
-            label: "username",
+            label: "email",
             required:true
 
         },
@@ -34,10 +34,10 @@ const Login = () =>{
         const onChange = (e)=>{
             setValues({...values, [e.target.name]: e.target.value})
         }
-
+     
         return(
             <div className="login">
-                <form action="https://localhost:7144/login" method="post">
+                <form action="https://localhost:7144/user/Login" method="post">
                 <h1>Login</h1>
                     {inputs.map((input)=>(
 

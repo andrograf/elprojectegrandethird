@@ -1,4 +1,5 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using System.Diagnostics;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using bitfit.DAL.IServices;
@@ -25,7 +26,9 @@ namespace bitfit.Controller
             _userService = userService;
         }
 
-        [HttpPost("/register")]
+        [HttpPost]
+        [Route("Create")]
+        [AllowAnonymous]
         public async Task<IActionResult> Create([FromForm]User user)
         {
             if (ModelState.IsValid)
@@ -37,18 +40,21 @@ namespace bitfit.Controller
             return new JsonResult("Invalid User") { StatusCode = 500 };
         }
 
-        [HttpGet("Login")]
-        public async Task<ActionResult<UserToken>> Login([FromBody] User user)
+        [HttpPost]
+        [Route("Login")]
+        [AllowAnonymous]
+        public async Task<ActionResult<UserToken>> Login([FromForm] User user)
         {
             var users = await _userService.GetAllAsync();
             user = users.Where(u => u.Email == user.Email && u.Password == user.Password).FirstOrDefault();
 
-            UserToken userWithToken = new UserToken(user);
-
-            if (userWithToken != null)
+            if (user == null)
             {
                 return NotFound();
             }
+
+            UserToken userWithToken = new UserToken(user);
+
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtSettings.SecretKey);
