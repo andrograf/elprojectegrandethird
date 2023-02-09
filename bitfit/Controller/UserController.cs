@@ -1,7 +1,12 @@
-﻿using bitfit.DAL.IServices;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using bitfit.DAL.IServices;
 using bitfit.Model.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace bitfit.Controller
 {
@@ -11,10 +16,12 @@ namespace bitfit.Controller
     {
         private readonly ILogger<UserController> _logger;
         private readonly IUserService _userService;
+        private readonly JWTSettings _jwtSettings;
 
         
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IOptions<JWTSettings> jwtsettings)
         {
+            _jwtSettings = jwtsettings.Value;
             _userService = userService;
         }
 
@@ -29,6 +36,38 @@ namespace bitfit.Controller
 
             return new JsonResult("Invalid User") { StatusCode = 500 };
         }
+
+        [HttpGet("Login")]
+        public async Task<ActionResult<UserToken>> Login([FromBody] User user)
+        {
+            var users = await _userService.GetAllAsync();
+            user = users.Where(u => u.Email == user.Email && u.Password == user.Password).FirstOrDefault();
+
+            UserToken userWithToken = new UserToken(user);
+
+            if (userWithToken != null)
+            {
+                return NotFound();
+            }
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_jwtSettings.SecretKey);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.Email),
+                }),
+                Expires = DateTime.UtcNow.AddMonths(6),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            userWithToken.AccessToken = tokenHandler.WriteToken(token);
+
+            return userWithToken;
+        }
+
 
         [HttpGet("/users/{id}")]
         public async Task<IActionResult> GetById(Guid id)
@@ -49,7 +88,7 @@ namespace bitfit.Controller
             return Ok(users);
         }
 
-        [HttpPost("/user/edit/{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, User user)
         {
             if (id != user.Id)

@@ -4,6 +4,7 @@ using bitfit.DAL.IServices;
 using bitfit.DAL.Repositories;
 using bitfit.DAL.Servies;
 using bitfit.Handlers;
+using bitfit.Model.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,6 +46,12 @@ namespace bitfit
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            var jwtSection = Configuration.GetSection("JWTSettings");
+            services.Configure<JWTSettings>(jwtSection);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
 
             // Add All Transients here
             services.AddTransient<IRecipeService, RecipeService>();
