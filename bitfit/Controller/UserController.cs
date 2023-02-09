@@ -1,15 +1,18 @@
 ﻿using bitfit.DAL.IServices;
 using bitfit.Model.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace bitfit.Controller
 {
+    [Authorize]
     [ApiController, Route("/user")]
     public class UserController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
         private readonly IUserService _userService;
 
+        
         public UserController(IUserService userService)
         {
             _userService = userService;
@@ -27,7 +30,7 @@ namespace bitfit.Controller
             return new JsonResult("Invalid User") { StatusCode = 500 };
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("/users/{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
             var user = await _userService.GetByGuid(id);
@@ -39,14 +42,14 @@ namespace bitfit.Controller
             return Ok(user);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpGet("/users")]
+        public async Task<IActionResult> GetAll()
         {
             var users = await _userService.GetAllAsync();
             return Ok(users);
         }
 
-        [HttpPost("/user/{id}")]
+        [HttpPost("/user/edit/{id}")]
         public async Task<IActionResult> Update(Guid id, User user)
         {
             if (id != user.Id)

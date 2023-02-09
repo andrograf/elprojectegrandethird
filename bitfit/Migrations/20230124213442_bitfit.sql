@@ -33,12 +33,12 @@ INSERT INTO Foods (Name,Sugar,Fiber, ServingSize,Sodium,Potassium,FatSaturated,F
     ('rice', 0.1,0.4,100,1,42,0.1,0.3,127.4,0,2.7,28.4)
 END
 
---IF NOT EXISTS ( SELECT 1 FROM User WHERE Name = 'Frank')
---BEGIN
--- INSERT INTO User (Name, Email, WeightInKg, HeightInCm, Password) VALUES
---     ('tomi', 'hajas@hajas.com', 94, 187, 'password'),
---     ('patri', 'patri@patri.com', 53, 167,'password'),
---     ('gergo', 'gergo@gergo.com', 80, 175,'password'),
---     ('robi', 'robi@robi.com', 85, 185,'password')
---     ('Frank', 'frank@frank.com', 103, 192,'password')
---END
+IF NOT EXISTS ( SELECT 1 FROM Users WHERE Name = 'Frank')
+BEGIN
+ INSERT INTO Users (Name, Email, WeightInKg, HeightInCm, Password) VALUES
+     ('tomi', 'hajas@hajas.com', 94, 187, 'password'),
+     ('patri', 'patri@patri.com', 53, 167, 'password'),
+     ('gergo', 'gergo@gergo.com', 80, 175, 'password'),
+     ('robi', 'robi@robi.com', 85, 185, 'password'),
+     ('Frank', 'frank@frank.com', 103, 192, 'password')
+END

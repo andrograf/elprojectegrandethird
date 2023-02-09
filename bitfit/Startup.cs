@@ -3,6 +3,8 @@ using bitfit.DAL.IRepositories;
 using bitfit.DAL.IServices;
 using bitfit.DAL.Repositories;
 using bitfit.DAL.Servies;
+using bitfit.Handlers;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Data.SqlClient;
@@ -48,6 +50,7 @@ namespace bitfit
             services.AddTransient<IRecipeService, RecipeService>();
             services.AddTransient<IFoodService, FoodService>();
             services.AddTransient<IUserService, UserService>();
+            
 
 
             services.AddCors(options =>
@@ -59,7 +62,8 @@ namespace bitfit
                 });
             });
             services.AddControllersWithViews();
-            
+            services.AddAuthentication("BasicAuthentication")
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
