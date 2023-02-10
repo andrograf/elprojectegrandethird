@@ -59,7 +59,7 @@ namespace bitfit.DAL.Servies
             try
             {
                 await dbSet.AddAsync(entity);
-                context.SaveChangesAsync();
+                await context.SaveChangesAsync();
                 return true;
             }
             catch (Exception e)
