@@ -5,8 +5,9 @@ import { NavMenu } from "./components/NavMenu";
 import { Articles } from './components/Articles';
 import { Recipes } from "./components/Recipes";
 import { AspNetTest } from "./components/AspNetTest";
-import  Register  from "./components/Register";
-import  Login  from "./components/Login";
+import Register  from "./components/Register";
+import Login from "./components/Login";
+
 
 
 const AppRoutes = [
@@ -39,11 +40,11 @@ const AppRoutes = [
         },
     {
         path: '/registration',
-        element: <Register/>
+        element: <Register />
     },
     {
         path: '/login',
-        element: <Login/>
+        element: <Login />
     }
 ];
 
