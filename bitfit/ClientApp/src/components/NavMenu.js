@@ -28,8 +28,8 @@ export class NavMenu extends Component {
             <nav className="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div className="container-fluid">
                     <div >
-                        <a className="navbar-brand" href="/" asp-area="" asp-controller="Home" asp-action="Index"><img src={this.state.hovered ? logo : logoHover } alt="BitFit" width="180px" onMouseOut={() => this.setState({ hovered: true })}
-                            onMouseOver={() => this.setState({ hovered: false })} /></a>
+                        <a className="navbar-brand" href="/" asp-area="" asp-controller="Home" asp-action="Index"><img src={this.state.hovered ? logoHover : logo } alt="BitFit" width="180px" onMouseOut={() => this.setState({ hovered: false })}
+                            onMouseOver={() => this.setState({ hovered: true })} /></a>
                         
                     </div>
                     <div className="navbar-collapse collapse d-sm-inline-flex justify-content-between">
