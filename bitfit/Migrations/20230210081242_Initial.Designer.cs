@@ -12,8 +12,8 @@ using bitfit.DAL;
 namespace bitfit.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230124203811_UserMigration")]
-    partial class UserMigration
+    [Migration("20230210081242_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -130,21 +130,24 @@ namespace bitfit.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<float>("BMI")
+                    b.Property<float?>("BMI")
                         .HasColumnType("real");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("HeightInCm")
+                    b.Property<float?>("HeightInCm")
                         .HasColumnType("real");
 
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("WeightInKg")
+                    b.Property<float?>("WeightInKg")
                         .HasColumnType("real");
 
                     b.HasKey("Id");

@@ -42,6 +42,7 @@ namespace bitfit.DAL.Servies
                 user.WeightInKg = entity.WeightInKg;
                 user.HeightInCm = entity.HeightInCm;
                 user.BMI = user.CalculateBMI();
+                context.SaveChangesAsync();
 
                 return true;
             }
@@ -58,6 +59,7 @@ namespace bitfit.DAL.Servies
             try
             {
                 await dbSet.AddAsync(entity);
+                context.SaveChangesAsync();
                 return true;
             }
             catch (Exception e)
@@ -73,6 +75,7 @@ namespace bitfit.DAL.Servies
             {
                 var user = await dbSet.Where(x => x.Id == id).FirstOrDefaultAsync();
                 dbSet.Remove(user);
+                context.SaveChangesAsync();
                 return true;
             }
             catch (Exception e)

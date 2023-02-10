@@ -127,21 +127,24 @@ namespace bitfit.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<float>("BMI")
+                    b.Property<float?>("BMI")
                         .HasColumnType("real");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("HeightInCm")
+                    b.Property<float?>("HeightInCm")
                         .HasColumnType("real");
 
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("WeightInKg")
+                    b.Property<float?>("WeightInKg")
                         .HasColumnType("real");
 
                     b.HasKey("Id");
