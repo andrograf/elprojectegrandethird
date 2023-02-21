@@ -6,7 +6,8 @@ namespace bitfit.Model.Entities
     public class User
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        [Key]
+        public Guid? Id { get; set; }
         public string Name { get; set; }
         [EmailAddress]
         public string Email { get; set; }
