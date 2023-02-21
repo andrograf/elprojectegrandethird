@@ -1,0 +1,26 @@
+name: Deploy to production
+
+on:
+  workflow_run:
+    workflows: ["Unit tests on main"]
+    branches:
+      - main
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - name: Install dependencies
+        run:  npm install 
+              npm ci
+      - name: Deploy to production
+        run: npm install deploy
+             npm run deploy
