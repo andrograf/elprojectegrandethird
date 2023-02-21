@@ -1,8 +1,16 @@
 version: '3.4'
 
 services:
+  db:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD= Pa55W0rd!1234*
+
   bitfit:
     image: ${DOCKER_REGISTRY-}bitfit
     build:
       context: .
       dockerfile: bitfit/Dockerfile
+    depends_on:
+      - db
