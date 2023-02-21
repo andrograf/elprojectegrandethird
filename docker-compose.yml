@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  bitfit:
+    image: ${DOCKER_REGISTRY-}bitfit
+    build:
+      context: .
+      dockerfile: bitfit/Dockerfile
