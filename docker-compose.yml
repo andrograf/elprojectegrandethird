@@ -14,5 +14,8 @@ services:
     build:
       context: .
       dockerfile: bitfit/Dockerfile
+    
+    ports:
+      - "7144:443"
     depends_on:
       - db
