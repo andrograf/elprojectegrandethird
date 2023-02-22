@@ -8,6 +8,8 @@ services:
       - SA_PASSWORD= Pa55W0rd!1234*
 
   bitfit:
+    environment:
+        ASPNETCORE_ENVIRONMENT: Development
     image: ${DOCKER_REGISTRY-}bitfit
     build:
       context: .
