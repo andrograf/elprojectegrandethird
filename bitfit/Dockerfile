@@ -1,32 +1,29 @@
-﻿# Use the official .NET Core SDK image as the base image
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+﻿# See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
-
-# Install Node.js and npm
-RUN apt-get update && apt-get install -y nodejs npm
-RUN npm install mermaid
-RUN npm audit fix --force
-
-# Copy the project file and restore any dependencies
-COPY *.csproj ./
-RUN dotnet restore
-
-# Copy the entire project and build it
-COPY . ./
-RUN dotnet publish -c Release -o out
-
-# Use the official ASP.NET Core runtime image as the base image
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
-WORKDIR /app
-
-# Copy the published output from the build environment
-COPY --from=build-env /app/out ./
-
-# Set the ASP.NET Core environment
-ENV ASPNETCORE_ENVIRONMENT Development
-
-# Expose the port that the application will listen on
 EXPOSE 80
+EXPOSE 443
 
-# Start the application
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+
+RUN apt-get update
+RUN apt-get install -y curl
+RUN apt-get install -y libpng-dev libjpeg-dev curl libxi6 build-essential libgl1-mesa-glx
+
+ENV PUBLIC_URL=bitfit
+
+WORKDIR /src
+COPY ["bitfit/bitfit.csproj", "bitfit/"]
+RUN dotnet restore "bitfit/bitfit.csproj"
+COPY . .
+WORKDIR "/src/bitfit"
+RUN dotnet build "bitfit.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "bitfit.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "bitfit.dll"]
