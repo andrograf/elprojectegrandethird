@@ -1,0 +1,17 @@
+name: bitfit
+services:
+- name: bitfit
+  project: src/bitfit/bitfit.csproj
+  external: true
+  bindings:
+    
+    - port: 5144
+      protocol: http
+      name: http
+    - port: 7144
+      protocol: https
+      name: aspnetcore
+    - port: 44447
+      protocol: https
+      name: spa 
+
