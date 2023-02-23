@@ -10,6 +10,13 @@ services:
   bitfit:
     environment:
         ASPNETCORE_ENVIRONMENT: Development
+        ASPNETCORE_HOSTINGSTARTUPASSEMBLIES: "Microsoft.AspNetCore.SpaProxy"
+        ASPNETCORE_URLS: "https://+:443;http://+:80"
+        ASPNETCORE_HTTPS_PORT: "7144"
+        FrontEndUrl: "https://localhost:44447"
+        SpaProxyServerUrl: "https://localhost:44447"
+
+
     image: ${DOCKER_REGISTRY-}bitfit
     build:
       context: .
